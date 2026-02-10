@@ -9,9 +9,37 @@
 </head>
 
 <body>
+    <div class="hearts-bg"></div>
+    <script>
+        // Dynamically create scattered, randomly rotated hearts
+        document.addEventListener('DOMContentLoaded', function () {
+            const heartsBg = document.querySelector('.hearts-bg');
+            if (!heartsBg) return;
+            const heartCount = 60; // Even more hearts for denser background
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                const size = 24 + Math.random() * 18; // 24-42px
+                const left = Math.random() * 95; // %
+                const top = Math.random() * 95; // %
+                const rotate = Math.floor(Math.random() * 360);
+                heart.style.position = 'absolute';
+                heart.style.left = left + '%';
+                heart.style.top = top + '%';
+                heart.style.width = size + 'px';
+                heart.style.height = (size * 0.9) + 'px';
+                heart.style.transform = `rotate(${rotate}deg)`;
+                heart.style.opacity = '0.18';
+                heart.style.pointerEvents = 'none';
+                heart.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 17s-7.5-5.2-7.5-10A4.5 4.5 0 0 1 10 3.5 4.5 4.5 0 0 1 17.5 7c0 4.8-7.5 10-7.5 10z" fill="#ff69b4"/></svg>`;
+                heartsBg.appendChild(heart);
+            }
+        });
+    </script>
     <div class="main-box">
         <div class="bordered-text">
-            Will you be my Valentine?<br>
+            <span class="valentine-question">Will you be my Valentine?</span><br>
             <button class="yes-btn">Yes</button>
             <button class="no-btn">No</button>
             <script src="script.js"></script>

@@ -22,18 +22,42 @@ document.querySelector('.yes-btn').addEventListener('click', function () {
     modal.style.background = 'rgba(255, 105, 180, 0.18)';
     modal.style.zIndex = '999';
 
+    // Create a flex column container for image and text
+    const content = document.createElement('div');
+    content.style.display = 'flex';
+    content.style.flexDirection = 'column';
+    content.style.alignItems = 'center';
+    content.style.justifyContent = 'center';
+
     // Create cat image
     const img = document.createElement('img');
     img.id = 'cat-kiss-img';
     img.src = 'cat.png'; // Local cat kissing image
     img.alt = 'Cat kissing';
-    img.style.maxWidth = '320px';
+    img.style.maxWidth = '90vw';
+    img.style.maxHeight = '60vh';
+    img.style.width = '100%';
+    img.style.height = 'auto';
     img.style.borderRadius = '24px';
     img.style.boxShadow = '0 4px 24px rgba(255,105,180,0.25)';
     img.style.background = '#fff';
     img.style.padding = '12px';
     img.style.cursor = 'pointer';
     img.style.transition = 'transform 0.2s';
+
+    // Add text below the cat image
+    const flowerText = document.createElement('div');
+    flowerText.textContent = "Here's a flower for the flower";
+    flowerText.style.marginTop = '18px';
+    flowerText.style.fontSize = '1.15em';
+    flowerText.style.fontWeight = '500';
+    flowerText.style.color = '#a8005a';
+    flowerText.style.textAlign = 'center';
+    flowerText.style.fontFamily = 'inherit';
+
+    content.appendChild(img);
+    content.appendChild(flowerText);
+    modal.appendChild(content);
 
     // Close modal and remove blur when image or modal background is clicked
     modal.addEventListener('click', function (e) {
@@ -43,24 +67,12 @@ document.querySelector('.yes-btn').addEventListener('click', function () {
         }
     });
 
-    modal.appendChild(img);
-
-    // Add text below the cat image
-    const flowerText = document.createElement('div');
-    flowerText.textContent = 'Here a flower for the flower';
-    flowerText.style.marginTop = '18px';
-    flowerText.style.fontSize = '1.15em';
-    flowerText.style.fontWeight = '500';
-    flowerText.style.color = '#a8005a';
-    flowerText.style.textAlign = 'center';
-    flowerText.style.fontFamily = 'inherit';
-    modal.appendChild(flowerText);
-
     document.body.appendChild(modal);
 });
 
 document.querySelector('.no-btn').addEventListener('click', function () {
-    alert('Maybe next time!');
+    alert('naa uhhh u cant do that');
+    location.reload();
 });
 
 

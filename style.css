@@ -1,3 +1,39 @@
+.valentine-question {
+    font-size: 2.1em;
+    font-weight: 700;
+    color: #e1006a;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 18px;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Hearts background overlay */
+.hearts-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Ensure main-box is above hearts */
+.main-box {
+    position: relative;
+    z-index: 1;
+}
+
 .cat-modal {
     animation: modal-pop 0.4s cubic-bezier(.68, -0.55, .27, 1.55);
 }

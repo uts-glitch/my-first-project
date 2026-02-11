@@ -29,11 +29,11 @@ document.querySelector('.yes-btn').addEventListener('click', function () {
     content.style.alignItems = 'center';
     content.style.justifyContent = 'center';
 
-    // Create cat image
+    // Create flower GIF image
     const img = document.createElement('img');
-    img.id = 'cat-kiss-img';
-    img.src = 'cat.png'; // Local cat kissing image
-    img.alt = 'Cat kissing';
+    img.id = 'flower-img';
+    img.src = 'HandingFlower.gif'; // Local handing flower GIF
+    img.alt = 'Handing flower';
     img.style.maxWidth = '90vw';
     img.style.maxHeight = '60vh';
     img.style.width = '100%';
@@ -45,23 +45,63 @@ document.querySelector('.yes-btn').addEventListener('click', function () {
     img.style.cursor = 'pointer';
     img.style.transition = 'transform 0.2s';
 
-    // Add text below the cat image
-    const flowerText = document.createElement('div');
-    flowerText.textContent = "Here's a flower for the flower";
-    flowerText.style.marginTop = '18px';
-    flowerText.style.fontSize = '1.15em';
-    flowerText.style.fontWeight = '500';
-    flowerText.style.color = '#a8005a';
-    flowerText.style.textAlign = 'center';
-    flowerText.style.fontFamily = 'inherit';
+    // Create a constrained wrapper to center and size both GIFs
+    const imgWrapper = document.createElement('div');
+    imgWrapper.style.position = 'relative';
+    imgWrapper.style.display = 'flex';
+    imgWrapper.style.alignItems = 'center';
+    imgWrapper.style.justifyContent = 'center';
+    imgWrapper.style.width = '90vw';
+    imgWrapper.style.maxWidth = '720px';
+    imgWrapper.style.height = '60vh';
+    imgWrapper.style.maxHeight = '72vh';
+    imgWrapper.style.overflow = 'hidden';
+    imgWrapper.style.borderRadius = '16px';
+    imgWrapper.style.background = '#fff';
+    imgWrapper.style.padding = '8px';
 
-    content.appendChild(img);
-    content.appendChild(flowerText);
+    // Style the flower image for crossfade (fills wrapper while preserving aspect)
+    img.style.position = 'absolute';
+    img.style.top = '0';
+    img.style.left = '0';
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'contain';
+    img.style.zIndex = '1';
+    img.style.transition = 'opacity 2.2s ease';
+    img.style.opacity = '1';
+    img.style.borderRadius = '12px';
+
+    const kissImg = document.createElement('img');
+    kissImg.id = 'kiss-img';
+    kissImg.src = 'Kiss.gif';
+    kissImg.alt = 'Kiss';
+    kissImg.style.position = 'absolute';
+    kissImg.style.top = '0';
+    kissImg.style.left = '0';
+    kissImg.style.width = '100%';
+    kissImg.style.height = '100%';
+    kissImg.style.objectFit = 'contain';
+    kissImg.style.zIndex = '2';
+    kissImg.style.transition = 'opacity 2.2s ease';
+    kissImg.style.opacity = '0';
+    kissImg.style.borderRadius = '12px';
+
+    // Place both images in the wrapper (kiss overlays flower)
+    imgWrapper.appendChild(img);
+    imgWrapper.appendChild(kissImg);
+    content.appendChild(imgWrapper);
     modal.appendChild(content);
+
+    // Start crossfade after a short delay: flower fades out, kiss fades in
+    setTimeout(function () {
+        img.style.opacity = '0';
+        kissImg.style.opacity = '1';
+    }, 600);
 
     // Close modal and remove blur when image or modal background is clicked
     modal.addEventListener('click', function (e) {
-        if (e.target === modal || e.target === img) {
+        if (e.target === modal || e.target === img || e.target === kissImg) {
             modal.remove();
             document.querySelector('.main-box').classList.remove('blurred');
         }

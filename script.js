@@ -71,8 +71,44 @@ document.querySelector('.yes-btn').addEventListener('click', function () {
 });
 
 document.querySelector('.no-btn').addEventListener('click', function () {
-    alert('naa uhhh u cant do that');
-    location.reload();
+    // Show the imported GIF for 3 seconds, then refresh the page
+    const existing = document.getElementById('no-gif-modal');
+    if (existing) existing.remove();
+
+    // Add blur to main content
+    const mainBox = document.querySelector('.main-box');
+    if (mainBox) mainBox.classList.add('blurred');
+
+    const modal = document.createElement('div');
+    modal.id = 'no-gif-modal';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.background = 'rgba(0,0,0,0.28)';
+    modal.style.zIndex = '9999';
+
+    const img = document.createElement('img');
+    img.src = 'Nooo.gif';
+    img.alt = 'No GIF';
+    img.style.maxWidth = '90vw';
+    img.style.maxHeight = '80vh';
+    img.style.width = 'auto';
+    img.style.height = 'auto';
+    img.style.borderRadius = '12px';
+    img.style.boxShadow = '0 8px 40px rgba(0,0,0,0.45)';
+
+    modal.appendChild(img);
+    document.body.appendChild(modal);
+
+    // After 3 seconds refresh the page
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 });
 
 
